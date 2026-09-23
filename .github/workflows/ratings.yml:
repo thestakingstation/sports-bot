@@ -1,0 +1,35 @@
+name: Weekly Ratings Refresh
+
+on:
+  schedule:
+    - cron: "0 5 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-ratings:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Build ratings
+        run: python ratings_builder.py
+
+      - name: Commit updated ratings
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add ratings.json
+          git diff --cached --quiet && echo "No changes to commit" || git commit -m "Refresh ratings.json [skip ci]"
+          git push
