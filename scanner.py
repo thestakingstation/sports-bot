@@ -1,4 +1,6 @@
 import os
+import json
+import uuid
 import math
 import requests
 from scipy.stats import norm
@@ -20,25 +22,44 @@ STD_DEV_NFL = 13.5
 STD_DEV_NBA = 12.0
 HOME_FIELD_ADVANTAGE = 2.5
 
-POWER_RATINGS = {
-    # "Kansas City Chiefs": 4.5,
-}
-
 TOTALS_LINE_FALLBACK = 2.5
-
-LEAGUE_AVG_HOME_GOALS = 1.5
-LEAGUE_AVG_AWAY_GOALS = 1.2
-TEAM_ATTACK_STRENGTH = {
-    # "Arsenal": 1.25,
-}
-TEAM_DEFENSE_STRENGTH = {
-    # "Arsenal": 0.85,
-}
-
 KELLY_FRACTION = 0.25
 
 OSRS_GOLD = 0xC2A649
 COIN_STACK_THUMB = "https://oldschool.runescape.wiki/images/Coins_10000.png"
+
+RATINGS_FILE = "ratings.json"
+PICKS_LOG_FILE = "picks_log.json"
+
+
+def load_ratings():
+    defaults = {
+        "power_ratings": {},
+        "league_avg_home_goals": 1.5,
+        "league_avg_away_goals": 1.2,
+        "team_attack_strength": {},
+        "team_defense_strength": {},
+    }
+    if not os.path.exists(RATINGS_FILE):
+        print(f"No {RATINGS_FILE} found yet — using neutral defaults until ratings_builder.py runs.")
+        return defaults
+    try:
+        with open(RATINGS_FILE) as f:
+            data = json.load(f)
+        for key in defaults:
+            data.setdefault(key, defaults[key])
+        return data
+    except Exception as e:
+        print(f"⚠️ Failed to load {RATINGS_FILE}: {e} — using neutral defaults.")
+        return defaults
+
+
+RATINGS = load_ratings()
+POWER_RATINGS = RATINGS["power_ratings"]
+LEAGUE_AVG_HOME_GOALS = RATINGS["league_avg_home_goals"]
+LEAGUE_AVG_AWAY_GOALS = RATINGS["league_avg_away_goals"]
+TEAM_ATTACK_STRENGTH = RATINGS["team_attack_strength"]
+TEAM_DEFENSE_STRENGTH = RATINGS["team_defense_strength"]
 
 
 def american_to_decimal(o):
@@ -105,6 +126,7 @@ def scan_one(sport_key, market_key):
         home, away = game.get("home_team"), game.get("away_team")
         if not home or not away:
             continue
+        commence_time = game.get("commence_time")
 
         for bm in game.get("bookmakers", []):
             for market in bm.get("markets", []):
@@ -117,20 +139,21 @@ def scan_one(sport_key, market_key):
                     ao = next((o for o in market["outcomes"] if o["name"] == away), None)
                     if not ho or not ao:
                         continue
-                    line = ho.get("point", 0)
+                    home_line = ho.get("point", 0)
                     h_dec, a_dec = american_to_decimal(ho["price"]), american_to_decimal(ao["price"])
                     fh, fa = remove_vig(decimal_to_implied_prob(h_dec), decimal_to_implied_prob(a_dec))
-                    model_h = spread_prob(margin, line, std_dev)
-                    for prob, mkt_prob, team, ln, dec, price in [
-                        (model_h, fh, home, line, h_dec, ho["price"]),
-                        (1 - model_h, fa, away, -line, a_dec, ao["price"]),
+                    model_h = spread_prob(margin, home_line, std_dev)
+                    for prob, mkt_prob, team, side, ln, dec, price in [
+                        (model_h, fh, home, "home", home_line, h_dec, ho["price"]),
+                        (1 - model_h, fa, away, "away", -home_line, a_dec, ao["price"]),
                     ]:
                         edge = (prob - mkt_prob) * 100
                         candidates.append({
-                            "sport": sport_key, "home": home, "away": away,
+                            "sport": sport_key, "home": home, "away": away, "commence_time": commence_time,
                             "market_label": "Spread", "pick": f"{team} {ln:+g}",
                             "model_prob": prob, "market_prob": mkt_prob, "edge": edge,
                             "odds_display": f"{price:+d} ({bm['title']})", "decimal_odds": dec,
+                            "grade_type": "spread", "grade_side": side, "home_line": home_line,
                         })
 
                 elif market_key == "h2h":
@@ -142,16 +165,17 @@ def scan_one(sport_key, market_key):
                     h_dec, a_dec = american_to_decimal(ho["price"]), american_to_decimal(ao["price"])
                     fh, fa = remove_vig(decimal_to_implied_prob(h_dec), decimal_to_implied_prob(a_dec))
                     model_h = spread_prob(margin, 0, std_dev)
-                    for prob, mkt_prob, team, dec, price in [
-                        (model_h, fh, home, h_dec, ho["price"]),
-                        (1 - model_h, fa, away, a_dec, ao["price"]),
+                    for prob, mkt_prob, team, side, dec, price in [
+                        (model_h, fh, home, "home", h_dec, ho["price"]),
+                        (1 - model_h, fa, away, "away", a_dec, ao["price"]),
                     ]:
                         edge = (prob - mkt_prob) * 100
                         candidates.append({
-                            "sport": sport_key, "home": home, "away": away,
+                            "sport": sport_key, "home": home, "away": away, "commence_time": commence_time,
                             "market_label": "Moneyline", "pick": team,
                             "model_prob": prob, "market_prob": mkt_prob, "edge": edge,
                             "odds_display": f"{price:+d} ({bm['title']})", "decimal_odds": dec,
+                            "grade_type": "h2h", "grade_side": side, "home_line": 0,
                         })
 
                 elif market_key == "totals":
@@ -164,16 +188,17 @@ def scan_one(sport_key, market_key):
                     o_dec, u_dec = american_to_decimal(oo["price"]), american_to_decimal(uo["price"])
                     fo, fu = remove_vig(decimal_to_implied_prob(o_dec), decimal_to_implied_prob(u_dec))
                     model_under = total_under_prob(lam_h, lam_a, line)
-                    for prob, mkt_prob, label, dec, price in [
-                        (1 - model_under, fo, f"Over {line}", o_dec, oo["price"]),
-                        (model_under, fu, f"Under {line}", u_dec, uo["price"]),
+                    for prob, mkt_prob, label, side, dec, price in [
+                        (1 - model_under, fo, f"Over {line}", "over", o_dec, oo["price"]),
+                        (model_under, fu, f"Under {line}", "under", u_dec, uo["price"]),
                     ]:
                         edge = (prob - mkt_prob) * 100
                         candidates.append({
-                            "sport": sport_key, "home": home, "away": away,
+                            "sport": sport_key, "home": home, "away": away, "commence_time": commence_time,
                             "market_label": "Total Goals", "pick": label,
                             "model_prob": prob, "market_prob": mkt_prob, "edge": edge,
                             "odds_display": f"{price:+d} ({bm['title']})", "decimal_odds": dec,
+                            "grade_type": "total", "grade_side": side, "total_line": line,
                         })
 
                 break
@@ -219,6 +244,39 @@ def post_top_picks(picks):
         print(f"✅ Posted top {len(picks)} pick(s) to Discord.")
 
 
+def log_picks(picks):
+    log = []
+    if os.path.exists(PICKS_LOG_FILE):
+        try:
+            with open(PICKS_LOG_FILE) as f:
+                log = json.load(f)
+        except Exception:
+            log = []
+
+    now = datetime.now(timezone.utc).isoformat()
+    for p in picks:
+        log.append({
+            "id": uuid.uuid4().hex[:12],
+            "logged_at": now,
+            "sport": p["sport"],
+            "home": p["home"],
+            "away": p["away"],
+            "commence_time": p.get("commence_time"),
+            "market_label": p["market_label"],
+            "pick_display": p["pick"],
+            "grade_type": p["grade_type"],
+            "grade_side": p["grade_side"],
+            "home_line": p.get("home_line"),
+            "total_line": p.get("total_line"),
+            "edge": p["edge"],
+            "status": "pending",
+        })
+
+    with open(PICKS_LOG_FILE, "w") as f:
+        json.dump(log, f, indent=2)
+    print(f"Logged {len(picks)} new pick(s) to {PICKS_LOG_FILE} ({len(log)} total on file).")
+
+
 def run():
     all_candidates = []
     for entry in SPORTS_TO_SCAN:
@@ -233,6 +291,9 @@ def run():
 
     print(f"\n{len(all_candidates)} total candidates, {len(positive)} positive-edge, posting top {len(top_picks)}")
     post_top_picks(top_picks)
+    if top_picks:
+        log_picks(top_picks)
 
 
-run()
+if __name__ == "__main__":
+    run()
