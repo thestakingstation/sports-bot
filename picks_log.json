@@ -334,5 +334,53 @@
     "total_line": null,
     "edge": 30.285183846579223,
     "status": "pending"
+  },
+  {
+    "id": "2deffe533718",
+    "logged_at": "2026-10-01T12:14:00.114037+00:00",
+    "sport": "americanfootball_nfl",
+    "home": "Miami Dolphins",
+    "away": "Cincinnati Bengals",
+    "commence_time": "2026-10-11T17:00:00Z",
+    "market_label": "Spread",
+    "pick_display": "Miami Dolphins +8.5",
+    "grade_type": "spread",
+    "grade_side": "home",
+    "home_line": 8.5,
+    "total_line": null,
+    "edge": 30.32450764363989,
+    "status": "pending"
+  },
+  {
+    "id": "e2990b2813a9",
+    "logged_at": "2026-10-01T12:14:00.114037+00:00",
+    "sport": "americanfootball_nfl",
+    "home": "Miami Dolphins",
+    "away": "Cincinnati Bengals",
+    "commence_time": "2026-10-11T17:00:00Z",
+    "market_label": "Spread",
+    "pick_display": "Miami Dolphins +9",
+    "grade_type": "spread",
+    "grade_side": "home",
+    "home_line": 9.0,
+    "total_line": null,
+    "edge": 30.285183846579223,
+    "status": "pending"
+  },
+  {
+    "id": "151fd793d121",
+    "logged_at": "2026-10-01T12:14:00.114037+00:00",
+    "sport": "americanfootball_nfl",
+    "home": "Miami Dolphins",
+    "away": "Cincinnati Bengals",
+    "commence_time": "2026-10-11T17:00:00Z",
+    "market_label": "Spread",
+    "pick_display": "Miami Dolphins +9",
+    "grade_type": "spread",
+    "grade_side": "home",
+    "home_line": 9.0,
+    "total_line": null,
+    "edge": 30.285183846579223,
+    "status": "pending"
   }
 ]
