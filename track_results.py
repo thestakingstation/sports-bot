@@ -109,6 +109,40 @@ def post_accuracy_report(log):
     else:
         print("✅ Posted accuracy report to Discord.")
 
+def post_individual_result(pick):
+    """Sends a distinct green/red alert to Discord for a newly graded pick."""
+    if DISCORD_WEBHOOK_URL == "YOUR_DISCORD_WEBHOOK_URL_HERE" or not DISCORD_WEBHOOK_URL:
+        return
+        
+    status = pick["status"]
+    
+    # Define aesthetic attributes based on result
+    if status == "won":
+        color_code = 3066993   # Vivid Emerald Green
+        status_label = "✅ WIN"
+    elif status == "lost":
+        color_code = 15158332  # Crimson Red
+        status_label = "❌ LOSS"
+    else:
+        color_code = 9807270   # Neutral Gray for "push"
+        status_label = "🔄 PUSH / VOID"
+
+    embed = {
+        "title": f"🏆 Pick Settled: {pick['away']} @ {pick['home']}",
+        "color": color_code,
+        "fields": [
+            {"name": "⚽ Sport/League", "value": pick['sport'].replace("_", " ").title(), "inline": True},
+            {"name": "🎯 Selection", "value": f"**{pick['pick_side'].upper()}**", "inline": True},
+            {"name": "📊 Outcome", "value": f"`{status_label}`", "inline": True},
+            {"name": "🔢 Final Score", "value": f"`{pick['final_score']}`", "inline": False}
+        ],
+        "footer": {"text": "Model 28 Proxy • Individual Settlement"}
+    }
+    
+    try:
+        requests.post(DISCORD_WEBHOOK_URL, json={"embeds": [embed]}, timeout=10)
+    except Exception as e:
+        print(f"⚠ Failed to push individual result to Discord: {e}")
 
 def main():
     if not os.path.exists(PICKS_LOG_FILE):
