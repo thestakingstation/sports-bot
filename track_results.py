@@ -144,7 +144,18 @@ def post_individual_result(pick):
     except Exception as e:
         print(f"⚠ Failed to push individual result to Discord: {e}")
 
-def main():
+def main():        home_score, away_score = match
+        result = grade_pick( pick, home_score, away_score)
+        
+        pick["status"] = result
+        pick["graded_at"] = datetime.now(timezone.utc).isoformat()
+        pick["final_score"] = f"{home_score:g}-{away_score:g}"
+        
+        # --- INSERT NEW LINE HERE ---
+        post_individual_result(pick)
+        
+        graded_count += 1
+
     if not os.path.exists(PICKS_LOG_FILE):
         print(f"No {PICKS_LOG_FILE} yet — nothing to grade.")
         return
