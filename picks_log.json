@@ -910,5 +910,53 @@
     "total_line": null,
     "edge": 28.164998463862112,
     "status": "pending"
+  },
+  {
+    "id": "7955aa851850",
+    "logged_at": "2026-10-13T13:20:24.406325+00:00",
+    "sport": "americanfootball_nfl",
+    "home": "Los Angeles Rams",
+    "away": "Arizona Cardinals",
+    "commence_time": "2026-10-18T20:05:00Z",
+    "market_label": "Spread",
+    "pick_display": "Arizona Cardinals +12.5",
+    "grade_type": "spread",
+    "grade_side": "away",
+    "home_line": -12.5,
+    "total_line": null,
+    "edge": 28.985487969079333,
+    "status": "pending"
+  },
+  {
+    "id": "8d21ab18b24e",
+    "logged_at": "2026-10-13T13:20:24.406325+00:00",
+    "sport": "americanfootball_nfl",
+    "home": "Los Angeles Rams",
+    "away": "Arizona Cardinals",
+    "commence_time": "2026-10-18T20:05:00Z",
+    "market_label": "Spread",
+    "pick_display": "Arizona Cardinals +13",
+    "grade_type": "spread",
+    "grade_side": "away",
+    "home_line": -13.0,
+    "total_line": null,
+    "edge": 28.384489245249295,
+    "status": "pending"
+  },
+  {
+    "id": "b864f64f5288",
+    "logged_at": "2026-10-13T13:20:24.406325+00:00",
+    "sport": "americanfootball_nfl",
+    "home": "Los Angeles Rams",
+    "away": "Arizona Cardinals",
+    "commence_time": "2026-10-18T20:05:00Z",
+    "market_label": "Spread",
+    "pick_display": "Arizona Cardinals +13",
+    "grade_type": "spread",
+    "grade_side": "away",
+    "home_line": -13.0,
+    "total_line": null,
+    "edge": 28.164998463862112,
+    "status": "pending"
   }
 ]
