@@ -1246,5 +1246,53 @@
     "total_line": null,
     "edge": 27.49044281052352,
     "status": "pending"
+  },
+  {
+    "id": "0f01b9f1bd70",
+    "logged_at": "2026-10-19T11:48:56.461205+00:00",
+    "sport": "soccer_epl",
+    "home": "Manchester City",
+    "away": "Brighton and Hove Albion",
+    "commence_time": "2026-10-31T15:00:00Z",
+    "market_label": "Total Goals",
+    "pick_display": "Under 3.0",
+    "grade_type": "total",
+    "grade_side": "under",
+    "home_line": null,
+    "total_line": 3.0,
+    "edge": 25.229342766658498,
+    "status": "pending"
+  },
+  {
+    "id": "a8a033ebbab7",
+    "logged_at": "2026-10-19T11:48:56.461205+00:00",
+    "sport": "americanfootball_nfl",
+    "home": "Las Vegas Raiders",
+    "away": "Los Angeles Rams",
+    "commence_time": "2026-10-25T20:25:00Z",
+    "market_label": "Spread",
+    "pick_display": "Las Vegas Raiders +5.5",
+    "grade_type": "spread",
+    "grade_side": "home",
+    "home_line": 5.5,
+    "total_line": null,
+    "edge": 23.410731737854967,
+    "status": "pending"
+  },
+  {
+    "id": "7f357d056a92",
+    "logged_at": "2026-10-19T11:48:56.461205+00:00",
+    "sport": "soccer_epl",
+    "home": "Aston Villa",
+    "away": "Manchester City",
+    "commence_time": "2026-10-24T11:30:00Z",
+    "market_label": "Total Goals",
+    "pick_display": "Under 3.0",
+    "grade_type": "total",
+    "grade_side": "under",
+    "home_line": null,
+    "total_line": 3.0,
+    "edge": 23.054650660785363,
+    "status": "pending"
   }
 ]
