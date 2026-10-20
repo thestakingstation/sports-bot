@@ -1294,5 +1294,53 @@
     "total_line": 3.0,
     "edge": 23.054650660785363,
     "status": "pending"
+  },
+  {
+    "id": "b69662a597f0",
+    "logged_at": "2026-10-20T10:47:43.322153+00:00",
+    "sport": "soccer_epl",
+    "home": "Manchester City",
+    "away": "Brighton and Hove Albion",
+    "commence_time": "2026-10-31T15:00:00Z",
+    "market_label": "Total Goals",
+    "pick_display": "Under 3.0",
+    "grade_type": "total",
+    "grade_side": "under",
+    "home_line": null,
+    "total_line": 3.0,
+    "edge": 25.229342766658498,
+    "status": "pending"
+  },
+  {
+    "id": "2792e5f42902",
+    "logged_at": "2026-10-20T10:47:43.322153+00:00",
+    "sport": "soccer_epl",
+    "home": "Aston Villa",
+    "away": "Manchester City",
+    "commence_time": "2026-10-24T11:30:00Z",
+    "market_label": "Total Goals",
+    "pick_display": "Under 3.0",
+    "grade_type": "total",
+    "grade_side": "under",
+    "home_line": null,
+    "total_line": 3.0,
+    "edge": 23.054650660785363,
+    "status": "pending"
+  },
+  {
+    "id": "46cc45245196",
+    "logged_at": "2026-10-20T10:47:43.322153+00:00",
+    "sport": "soccer_epl",
+    "home": "Aston Villa",
+    "away": "Manchester City",
+    "commence_time": "2026-10-24T11:30:00Z",
+    "market_label": "Total Goals",
+    "pick_display": "Under 3.0",
+    "grade_type": "total",
+    "grade_side": "under",
+    "home_line": null,
+    "total_line": 3.0,
+    "edge": 23.054650660785363,
+    "status": "pending"
   }
 ]
