@@ -1678,5 +1678,53 @@
     "total_line": null,
     "edge": 27.002557950708646,
     "status": "pending"
+  },
+  {
+    "id": "047fe684679a",
+    "logged_at": "2026-10-28T11:56:58.786331+00:00",
+    "sport": "soccer_epl",
+    "home": "Arsenal",
+    "away": "Hull City",
+    "commence_time": "2026-11-07T15:00:00Z",
+    "market_label": "Total Goals",
+    "pick_display": "Under 3.0",
+    "grade_type": "total",
+    "grade_side": "under",
+    "home_line": null,
+    "total_line": 3.0,
+    "edge": 28.000511711729782,
+    "status": "pending"
+  },
+  {
+    "id": "951add3a7d99",
+    "logged_at": "2026-10-28T11:56:58.786331+00:00",
+    "sport": "americanfootball_nfl",
+    "home": "Miami Dolphins",
+    "away": "Detroit Lions",
+    "commence_time": "2026-11-08T18:00:00Z",
+    "market_label": "Spread",
+    "pick_display": "Miami Dolphins +7.5",
+    "grade_type": "spread",
+    "grade_side": "home",
+    "home_line": 7.5,
+    "total_line": null,
+    "edge": 27.810220328509423,
+    "status": "pending"
+  },
+  {
+    "id": "c01549b72dd7",
+    "logged_at": "2026-10-28T11:56:58.786331+00:00",
+    "sport": "americanfootball_nfl",
+    "home": "Miami Dolphins",
+    "away": "Detroit Lions",
+    "commence_time": "2026-11-08T18:00:00Z",
+    "market_label": "Spread",
+    "pick_display": "Miami Dolphins +8.5",
+    "grade_type": "spread",
+    "grade_side": "home",
+    "home_line": 8.5,
+    "total_line": null,
+    "edge": 27.3130634594523,
+    "status": "pending"
   }
 ]
