@@ -2254,5 +2254,53 @@
     "total_line": null,
     "edge": 32.275776156334416,
     "status": "pending"
+  },
+  {
+    "id": "ecce7ed602b0",
+    "logged_at": "2026-11-09T14:53:53.742794+00:00",
+    "sport": "americanfootball_nfl",
+    "home": "Tennessee Titans",
+    "away": "Jacksonville Jaguars",
+    "commence_time": "2026-11-15T18:00:00Z",
+    "market_label": "Spread",
+    "pick_display": "Tennessee Titans +9.5",
+    "grade_type": "spread",
+    "grade_side": "home",
+    "home_line": 9.5,
+    "total_line": null,
+    "edge": 32.81523243034503,
+    "status": "pending"
+  },
+  {
+    "id": "4b7c465b8375",
+    "logged_at": "2026-11-09T14:53:53.742794+00:00",
+    "sport": "americanfootball_nfl",
+    "home": "Tennessee Titans",
+    "away": "Jacksonville Jaguars",
+    "commence_time": "2026-11-15T18:00:00Z",
+    "market_label": "Spread",
+    "pick_display": "Tennessee Titans +9.5",
+    "grade_type": "spread",
+    "grade_side": "home",
+    "home_line": 9.5,
+    "total_line": null,
+    "edge": 32.464489201542825,
+    "status": "pending"
+  },
+  {
+    "id": "6d4669b8c755",
+    "logged_at": "2026-11-09T14:53:53.742794+00:00",
+    "sport": "americanfootball_nfl",
+    "home": "Tennessee Titans",
+    "away": "Jacksonville Jaguars",
+    "commence_time": "2026-11-15T18:00:00Z",
+    "market_label": "Spread",
+    "pick_display": "Tennessee Titans +9.5",
+    "grade_type": "spread",
+    "grade_side": "home",
+    "home_line": 9.5,
+    "total_line": null,
+    "edge": 32.38028374409076,
+    "status": "pending"
   }
 ]
