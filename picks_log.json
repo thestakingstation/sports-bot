@@ -2782,5 +2782,53 @@
     "total_line": null,
     "edge": 35.01407016943955,
     "status": "pending"
+  },
+  {
+    "id": "a5be7e309b1d",
+    "logged_at": "2026-11-20T14:44:35.003867+00:00",
+    "sport": "americanfootball_nfl",
+    "home": "Kansas City Chiefs",
+    "away": "Arizona Cardinals",
+    "commence_time": "2026-11-22T18:00:00Z",
+    "market_label": "Spread",
+    "pick_display": "Arizona Cardinals +16.5",
+    "grade_type": "spread",
+    "grade_side": "away",
+    "home_line": -16.5,
+    "total_line": null,
+    "edge": 35.01407016943955,
+    "status": "pending"
+  },
+  {
+    "id": "7fe0b3c50df3",
+    "logged_at": "2026-11-20T14:44:35.003867+00:00",
+    "sport": "americanfootball_nfl",
+    "home": "Kansas City Chiefs",
+    "away": "Arizona Cardinals",
+    "commence_time": "2026-11-22T18:00:00Z",
+    "market_label": "Spread",
+    "pick_display": "Arizona Cardinals +16.5",
+    "grade_type": "spread",
+    "grade_side": "away",
+    "home_line": -16.5,
+    "total_line": null,
+    "edge": 35.01407016943955,
+    "status": "pending"
+  },
+  {
+    "id": "d457ca75d9fd",
+    "logged_at": "2026-11-20T14:44:35.003867+00:00",
+    "sport": "americanfootball_nfl",
+    "home": "Kansas City Chiefs",
+    "away": "Arizona Cardinals",
+    "commence_time": "2026-11-22T18:00:00Z",
+    "market_label": "Spread",
+    "pick_display": "Arizona Cardinals +16.5",
+    "grade_type": "spread",
+    "grade_side": "away",
+    "home_line": -16.5,
+    "total_line": null,
+    "edge": 35.01407016943955,
+    "status": "pending"
   }
 ]
