@@ -3070,5 +3070,53 @@
     "total_line": null,
     "edge": 38.20278819387608,
     "status": "pending"
+  },
+  {
+    "id": "f49ac83f5d2b",
+    "logged_at": "2026-11-26T16:11:43.635581+00:00",
+    "sport": "americanfootball_nfl",
+    "home": "New England Patriots",
+    "away": "Buffalo Bills",
+    "commence_time": "2026-12-06T21:25:00Z",
+    "market_label": "Spread",
+    "pick_display": "New England Patriots +13.5",
+    "grade_type": "spread",
+    "grade_side": "home",
+    "home_line": 13.5,
+    "total_line": null,
+    "edge": 38.52525788172543,
+    "status": "pending"
+  },
+  {
+    "id": "844938aae5c0",
+    "logged_at": "2026-11-26T16:11:43.635581+00:00",
+    "sport": "americanfootball_nfl",
+    "home": "New England Patriots",
+    "away": "Buffalo Bills",
+    "commence_time": "2026-12-06T21:25:00Z",
+    "market_label": "Spread",
+    "pick_display": "New England Patriots +13.5",
+    "grade_type": "spread",
+    "grade_side": "home",
+    "home_line": 13.5,
+    "total_line": null,
+    "edge": 38.20278819387608,
+    "status": "pending"
+  },
+  {
+    "id": "45405f5aed30",
+    "logged_at": "2026-11-26T16:11:43.635581+00:00",
+    "sport": "americanfootball_nfl",
+    "home": "New England Patriots",
+    "away": "Buffalo Bills",
+    "commence_time": "2026-12-06T21:25:00Z",
+    "market_label": "Spread",
+    "pick_display": "New England Patriots +13.5",
+    "grade_type": "spread",
+    "grade_side": "home",
+    "home_line": 13.5,
+    "total_line": null,
+    "edge": 38.20278819387608,
+    "status": "pending"
   }
 ]
